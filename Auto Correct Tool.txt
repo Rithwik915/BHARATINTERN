@@ -1,0 +1,22 @@
+import textdistance
+
+def correct_or_nearest_word(word, word_list):
+    min_distance = float('inf')
+    closest_word = None
+
+    for candidate in word_list:
+        distance = textdistance.levenshtein.normalized_similarity(word, candidate)
+        if distance < min_distance:
+            min_distance = distance
+            closest_word = candidate
+
+    return closest_word
+
+# Sample word list for demonstration
+word_list = ["apple", "banana", "orange", "pear", "grape"]
+
+# Test the function with a misspelled word
+misspelled_word = "aplpe"
+corrected_word = correct_or_nearest_word(misspelled_word, word_list)
+print(f"Original word: {misspelled_word}")
+print(f"Corrected word: {corrected_word}")
